@@ -10,17 +10,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+/*
+* Here we used Spring WebSecurity features for our application
+* this class extend an interface with various methods.
+* in our work we used 3 methods of the interface to secure our work
+*/
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final EmployeeService employeeService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    //this method protects the end points and also our login
+    //we defined the custom login and logout
+    //and providing permissions
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //super.configure(http);
         http
                 .csrf().disable()
                 .authorizeRequests()

@@ -12,10 +12,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-
+// handling the business logics of the registration
 @Service
 @AllArgsConstructor
 public class RegistrationService {
+    //adding other classes in the filed of the current class
     private final EmployeeService employeeService;
     private final DepartmentService departmentService;
     private final ConfirmationTokenService confirmationTokenService;
@@ -25,7 +26,7 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         // email should be validated
         boolean isValidEmail = emailValidator.test(request.getEmail());
-
+        //if the email is not valid then:
         if (!isValidEmail) {
             throw new IllegalStateException("e-mail is not valid");
         }
@@ -50,6 +51,7 @@ public class RegistrationService {
 
     @Transactional
     public String confirmToken(String token) {
+        //we need to check if confirmation token is there, and it's confirmed
         // search for the token
         ConfirmationToken confirmationToken = confirmationTokenService.getConfirmationToken(token)
                 .orElseThrow( () -> new IllegalStateException("Token not found") );
