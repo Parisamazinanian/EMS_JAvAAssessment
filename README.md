@@ -43,4 +43,8 @@ The `delete` feature is allowed only to the ADMIN. The permission is given in th
 `.antMatchers("/delete").hasAuthority("ADMIN")`  
 `.antMatchers("/deleteEmployee").hasAuthority("ADMIN")`
 
-The method `deleteEmployee` is built inside the `EmployeeService` class, receiving `String email` as parameter and the `loadUserByUsername` is used to seek up the employee by email and an employee object is returned. At the end the `delete()`method from JPA is used to delete the employee. 
+The method `deleteEmployee` is built inside the `EmployeeService` class, receiving `String email` as parameter and the `loadUserByUsername` is used to seek up the employee by email and an employee object is returned. At the end the `delete()`method from JPA is used to delete the employee.
+
+## Resources
+The code base for this application was provided by the AmigosCode tutorial **Java Tutorial - Complete User Login and Registration Backend + Email Verification** can be watched through
+> https://www.youtube.com/watch?v=QwQuro7ekvc&t=4501s
