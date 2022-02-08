@@ -9,18 +9,22 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
+/*
+* Employee class which is implementing an already existed UserDetails interface
+* We defined some fields in this class
+* Lombok's annotations were used
+* this class in an Entity that means later we can use this class as a table in our db */
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
 public class Employee implements UserDetails {
+    //annotations for generating the employee Ids automatically
     @Id
     @SequenceGenerator(
             name = "employee_sequence",
@@ -32,6 +36,7 @@ public class Employee implements UserDetails {
             generator = "employee_sequence"
     )
     private Long id;
+    //this class is joined to the Department table from "departemtn_id" column
     @ManyToOne
     @JoinColumn(
             nullable = false,
@@ -41,15 +46,16 @@ public class Employee implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    //employee Status is and Enum class so we need to use this annotation
     @Enumerated(EnumType.STRING)
     private EmployeeStatus employeeStatus;
     private Boolean locked = false;
     private Boolean enabled = false;
-    //when we want to delete because this table is connected to token so we are giving the permission
+    //when we want to delete an employee because this table is connected to token, so we are giving the permission
     //to delete the token connected to it
     @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, mappedBy = "employee")
     private List<ConfirmationToken> tokens;//because we have more than one token for each user so delete them
-
+    //Creating a constructor without the id
     public Employee(Department department,
                    String firstName,
                    String lastName,
@@ -63,10 +69,13 @@ public class Employee implements UserDetails {
         this.password = password;
         this.employeeStatus = employeeStatus;
     }
-
+    //Overriding the methods of UserDetails interface
+    //this method is for securing the authority (in this case people in our EmployeeStatus Enum class)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        //building an instance of class SimpleGrantedAuthority and this object is dependent on the assigned user
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(employeeStatus.name());
+        // a list with one member (authority)
         return Collections.singletonList(authority);
     }
 
@@ -82,6 +91,7 @@ public class Employee implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
+        //we make it valid (if it is non expired)
         return true;
     }
 

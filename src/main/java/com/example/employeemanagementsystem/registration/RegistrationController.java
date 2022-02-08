@@ -10,12 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.HashSet;;
 import java.util.Set;
 
 @Controller
-//@RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor
 public class RegistrationController {
 

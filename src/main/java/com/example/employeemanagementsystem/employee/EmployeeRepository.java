@@ -8,14 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+/*
+* Employee Repository class for handling the db
+*/
 @Repository
-@Transactional(readOnly = true)
+@Transactional(readOnly = true)//readonly means just basic access to the db
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     Optional<Employee> findByEmail(String email);
 
-    @Transactional
+    @Transactional//once we change something in our db we use transactional
     @Modifying
+    //search for a user with this email and set the enabled field into true
     @Query("UPDATE Employee e " +
             "SET e.enabled = TRUE " +
             "WHERE e.email = ?1"

@@ -5,7 +5,6 @@ import com.example.employeemanagementsystem.email.EmailSender;
 import com.example.employeemanagementsystem.email.EmailValidator;
 import com.example.employeemanagementsystem.employee.Employee;
 import com.example.employeemanagementsystem.employee.EmployeeService;
-import com.example.employeemanagementsystem.employee.EmployeeStatus;
 import com.example.employeemanagementsystem.security.token.ConfirmationToken;
 import com.example.employeemanagementsystem.security.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
@@ -42,7 +41,6 @@ public class RegistrationService {
                         request.getEmployeeStatus()
                 ));
         // create a confirmation link to be sent to the user email
-        //String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         String link = "http://localhost:8080/confirm?token=" + token;
         // Send e-mail
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
@@ -68,7 +66,7 @@ public class RegistrationService {
         // return String to confirm
         return "confirmed";
     }
-
+    //Markup language for structure of the sent email
     private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
