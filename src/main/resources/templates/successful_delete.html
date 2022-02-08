@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete was successful</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<div class="menu">
+    <h1>Delete was successful</h1>
+    <h4>You deleted the employee with this email:  <span th:text="${emaildeleted}"></span>!</h4>
+    <a href="/">Navigate to main page</a>
+</div>
+</body>
+</html>

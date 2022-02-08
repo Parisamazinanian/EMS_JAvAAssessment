@@ -79,5 +79,12 @@ public class EmployeeService implements UserDetailsService {
         employeeRepository.update(changeRequest.getEmail(), changeRequest.getFirstName(), changeRequest.getLastName());
     }
 
-
+    //create a boolean to check if the email is there or not, we used this method
+    //in the RegistrationController class
+    public boolean checkEmailExistForDelete(String email){
+        if (employeeRepository.findByEmail(email).isPresent()){
+            return true;
+        }else{
+            return false;}
+    }
 }

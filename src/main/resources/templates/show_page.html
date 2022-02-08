@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Page</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<div class="menu">
+    <h1>Employee Information</h1>
+    <h2>First Name <span th:text="${employee.getFirstName()}"></span> </h2>
+    <h2>Last Name <span th:text="${employee.getLastName()}"></span> </h2>
+    <h2>Email <span th:text="${employee.getEmail()}"></span> </h2>
+    <h2>Department <span th:text="${employee.getDepartment().getName()}"></span> </h2>
+    <h2>Status <span th:text="${employee.getEmployeeStatus()}"></span> </h2>
+    <a href="/">Navigate to main page</a>
+</div>
+</body>
+</html>
