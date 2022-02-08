@@ -4,10 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Personal Page</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<h1>Welcome <span sec:authentication="name">{name}</span> </h1>
-<a sec:authorize="isAuthenticated()" th:href="@{/update(email=${#authentication.name})}">Update</a>
-<a href="/">Navigate to main page</a>
+<div class="menu">
+    <h1>Employee Management System</h1>
+    <h2>Welcome <span th:text="${#authentication.getPrincipal().getFirstName()}"></span> </h2>
+    <a th:href="@{/update(email=${#authentication.name})}">Update your personal info</a><br>
+    <a th:href="@{/delete}">Delete an employee</a><br>
+    <a href="/">Navigate to main page</a>
+</div>
 </body>
 </html>

@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Confirmation</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<h1>You made it, <span th:text="${userName}"></span>!</h1>
-<a href="/">Navigate to main page</a>
+<div class="info">
+    <h1>Employee Management System</h1>
+    <h2>You made it, <span th:text="${userName}"></span>!</h2>
+    <a href="/">Navigate to main page</a>
+</div>
 </body>
 </html>
