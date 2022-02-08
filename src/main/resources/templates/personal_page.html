@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Page</title>
+</head>
+<body>
+<h1>Welcome <span sec:authentication="name">{name}</span> </h1>
+<a sec:authorize="isAuthenticated()" th:href="@{/update(email=${#authentication.name})}">Update</a>
+<a href="/">Navigate to main page</a>
+</body>
+</html>

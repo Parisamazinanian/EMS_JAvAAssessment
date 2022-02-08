@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Update page</title>
+</head>
+<body>
+<div class="form">
+    <h2>Update page</h2>
+    <form action="/updateEmployee" method="post">
+        <div class="input-box">
+            <i aria-hidden="true" class="fa fa-user"></i>
+            <input type="hidden" name="email" th:value="${email}"/>
+        </div>
+        <div class="input-box">
+            <i aria-hidden="true" class="fa fa-user"></i>
+            <input type="text" name="firstName" th:placeholder="${#authentication.getPrincipal().getFirstName()}">
+        </div>
+        <div class="input-box">
+            <i aria-hidden="true" class="fa fa-user"></i>
+            <input type="text" name="lastName" th:placeholder="${#authentication.getPrincipal().getLastName()}">
+        </div>
+        <div class="input-box">
+            <input type="submit" name="update" value="Update">
+        </div>
+        <a href="/">Navigate to main page</a>
+    </form>
+</div>
+</body>
+</html>
