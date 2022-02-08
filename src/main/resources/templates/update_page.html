@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Update page</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 <div class="form">
-    <h2>Update page</h2>
+    <h1>Employee Management System</h1>
+    <h2>Update your data</h2>
     <form action="/updateEmployee" method="post">
         <div class="input-box">
             <i aria-hidden="true" class="fa fa-user"></i>
@@ -15,15 +17,18 @@
         </div>
         <div class="input-box">
             <i aria-hidden="true" class="fa fa-user"></i>
-            <input type="text" name="firstName" th:placeholder="${#authentication.getPrincipal().getFirstName()}">
+            <label class="form-label" for="firstName">First name</label>
+            <input type="text" name="firstName" id="firstName" th:placeholder="${#authentication.getPrincipal().getFirstName()}">
         </div>
         <div class="input-box">
             <i aria-hidden="true" class="fa fa-user"></i>
-            <input type="text" name="lastName" th:placeholder="${#authentication.getPrincipal().getLastName()}">
+            <label class="form-label" for="lastName">Last name</label>
+            <input type="text" name="lastName" id="lastName"  th:placeholder="${#authentication.getPrincipal().getLastName()}">
         </div>
         <div class="input-box">
             <input type="submit" name="update" value="Update">
         </div>
+        <a href="/personal">Navigate to personal page</a>
         <a href="/">Navigate to main page</a>
     </form>
 </div>
