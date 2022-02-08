@@ -74,7 +74,9 @@ public class RegistrationController {
     }
     //for accessing to the personal page after a successful login
     @GetMapping("/personal")
-    public String getPersonalPage() {
+    public String getPersonalPage(Model model, Principal principal) {
+        Employee employee = employeeRepository.findByEmail(principal.getName()).get();
+        model.addAttribute("employee", employee);
         return "personal_page";
     }
     //showing the error page if the login or confirmation was not working
@@ -89,25 +91,47 @@ public class RegistrationController {
     }
     //deleting the employee, this is only possible by the ADMIN
     @RequestMapping("/deleteEmployee")
-    public String deleteEmployee(@RequestParam String deleteRequestEmail) {
-        employeeService.deleteEmployee(deleteRequestEmail);
-        return "index";
-    }
+    public String deleteEmployee(@RequestParam String deleteRequestEmail, Model model) {
+        if (employeeService.checkEmailExistForDelete(deleteRequestEmail)){
+            employeeService.deleteEmployee(deleteRequestEmail);
+            model.addAttribute("emaildeleted", deleteRequestEmail);
+            return "successful_delete";
+        }else{
+
+            return "error_page";
+        }}
     //updating employee information
     @GetMapping(value="/update")
     public String getUpdatePage(Principal principal, Model model) {
-        // System.out.println("email is: "+ email);
-        //Employee employee = employeeRepository.findByEmail(email).get();
+
         model.addAttribute("email", principal.getName());
         return "update_page";
     }
     //updating employee information based on the created object in changRequest class
     @RequestMapping("/updateEmployee")
     public String updateEmployee(@ModelAttribute ChangeRequest changeRequest) {
-        System.out.println(changeRequest.getEmail());
+        Employee employee = (Employee) employeeService.loadUserByUsername(changeRequest.getEmail());
+    //making sure the employee doesn't delete his own data
+        if (changeRequest.getFirstName().isBlank() && changeRequest.getLastName().isBlank()) {
+            return "error_page";
+        } else if (changeRequest.getFirstName().isBlank()) {
+            changeRequest.setFirstName(employee.getFirstName());
+        } else if (changeRequest.getLastName().isBlank()) {
+            changeRequest.setLastName(employee.getLastName());
+        }
         employeeService.updateEmployee(changeRequest);
         return "index";
     }
-
-
+    // return the show_page showing the employee data
+    @GetMapping("/show_page")
+    public String showPage(Model model, Principal principal){
+        Employee employee = employeeRepository.findByEmail(principal.getName()).get();
+        model.addAttribute("employee", employee);
+        return "show_page";
+    }
+    // return the forbidden page
+    @RequestMapping("/forbidden.html")
+    public String getForbiddenPage() {
+        return "forbidden";
+    }
 }

@@ -18,12 +18,14 @@
         <div class="input-box">
             <i aria-hidden="true" class="fa fa-user"></i>
             <label class="form-label" for="firstName">First name</label>
-            <input type="text" name="firstName" id="firstName" th:placeholder="${#authentication.getPrincipal().getFirstName()}">
+            <input type="text" name="firstName" id="firstName">
+<!--            <input type="text" name="firstName" id="firstName" th:placeholder="${#authentication.getPrincipal().getFirstName()}">-->
         </div>
         <div class="input-box">
             <i aria-hidden="true" class="fa fa-user"></i>
             <label class="form-label" for="lastName">Last name</label>
-            <input type="text" name="lastName" id="lastName"  th:placeholder="${#authentication.getPrincipal().getLastName()}">
+            <input type="text" name="lastName" id="lastName">
+<!--            <input type="text" name="lastName" id="lastName"  th:placeholder="${#authentication.getPrincipal().getLastName()}">-->
         </div>
         <div class="input-box">
             <input type="submit" name="update" value="Update">

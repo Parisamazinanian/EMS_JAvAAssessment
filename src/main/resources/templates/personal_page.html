@@ -9,10 +9,12 @@
 <body>
 <div class="menu">
     <h1>Employee Management System</h1>
-    <h2>Welcome <span th:text="${#authentication.getPrincipal().getFirstName()}"></span> </h2>
+    <h2>Welcome <span th:text="${employee.getFirstName()}"></span> </h2>
+    <!--    <h2>Welcome <span th:text="${#authentication.getPrincipal().getFirstName()}"></span> </h2>-->
     <a th:href="@{/update(email=${#authentication.name})}">Update your personal info</a><br>
     <a th:href="@{/delete}">Delete an employee</a><br>
     <a href="/">Navigate to main page</a>
+    <a href="/show_page">Navigate to Show Page</a>
 </div>
 </body>
 </html>
